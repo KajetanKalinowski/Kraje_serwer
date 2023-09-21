@@ -1,41 +1,64 @@
-const express = require('express')
+const express= require('express')
 const cors = require('cors')
-const mysql = require('mysql')
 const axios = require('axios')
 const app = express()
-app.use(cors())
+const mysql = require('mysql')
 var con = mysql.createConnection({
     host:'localhost',
-    user:"root",
+    user:'root',
     password:"",
     database:"swiat"
 })
 con.connect((err)=>{
     if(err) console.log(err)
-    else{console.log('Połonczono')}
+    else{
+        console.log('polaczono')
+    }
 })
-//app.get('/', (req, res) => {
-axios.get('https://restcountries.com/v3.1/all').then((response)=>{
-    const resp = response.data
-    for(var i=0;i<=resp.length-1;i++){
-    const sql = `INSERT INTO kraje(name, population, capital, area) VALUES ("${resp[i].name.common}", "${resp[i].population}", "${resp[i].capital}","${resp[i].area}")`
-    
-    con.query(sql,(err,result,fields)=>{
-        if(err)console.log(err) 
-        else{console.log("Dodano pomyślnie kraj")}
+app.use(cors())
+    axios.get('https://restcountries.com/v3.1/all').then((response)=>{
+        const resp = response.data
+        var currentTable =[]
+        con.query(`SELECT * FROM kraje`,(err,result,fields)=>{
+            if(err) console.log(err)
+            else currentTable = result
+            console.log(currentTable)
+        })
+        for(var i=0;i<=resp.length-1;i++){
+            console.log(resp[i].name.common)
+            console.log(currentTable[i])
+                const sql = `INSERT INTO kraje(name, capital, population) VALUES ("${resp[i].name.common}","${resp[i].capital}",${resp[i].population})`
+                con.query(sql, (err,result,fields)=>{
+                })
+                const sql2 = `UPDATE kraje SET area="${resp[i].area}" , kontynent="${resp[i].region}" WHERE name = "${resp[i].name.common}"`
+                con.query(sql2,(err,result,fields)=>{
+                    if(err) console.log(err)
+                })
+            
+            
+            
+            
+            
+        }
+        
     })
-}for(var i=0;i<=resp.length-1;i++){
-    const sql =` UPDATE kraje SET name="${resp[i].name.common}",population="${resp[i].population}",capital="${resp[i].capital}",area="${resp[i].area}"` 
-    con.query(sql,(err,result,fields)=>{
-        if(err)console.log(err)
-        else{console.log("Pomyślnie zaktualizowano")}
+    app.get('/kontynent/:kontynent',(req,res)=>{
+        const kontynent = req.params.kontynent
+        const sql = `SELECT * FROM kraje WHERE kontynent='${kontynent}'`
+        con.query(sql,function(err,result,fields){
+            if(err) console.log(err)
+            res.send(result)
+        })
+        
     })
-}
-    
-})
-
-//res.json(responseData);
-//})
-
-
-app.listen(3000)
+    app.get('/populacja/:populacja',(req,res)=>{
+        const populacja = parseInt(req.params.populacja)
+        
+            const sql = `SELECT * FROM kraje WHERE population>='${populacja}'`
+            con.query(sql,function(err,result,fields){
+                if(err) console.log(err)
+                res.send(result)
+            })
+        
+    })
+    app.listen(3000)
