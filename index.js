@@ -20,7 +20,7 @@ axios.get('https://restcountries.com/v3.1/all').then((response)=>{
     for(var i=0;i<=resp.length-1;i++){
     const sql = `INSERT INTO kraje(name, population, capital) VALUES ("${resp[i].name.common}", "${resp[i].population}", "${resp[i].capital}")`
     con.query(sql,(err,result,fields)=>{
-        if(err) console.log(err)
+        if(err) console.log("Ten element jest już w tabeli")
         else{console.log("Dodano pomyślnie kraj")}
     })
     }
