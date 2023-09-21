@@ -61,4 +61,13 @@ app.use(cors())
             })
         
     })
+    app.get('/region',(req,res)=>{
+            const sql = `SELECT DISTINCT kontynent FROM kraje `
+            con.query(sql,function(err,result,fields){
+                if(err) console.log(err)
+                res.send(result)
+            })
+        
+    })
+
     app.listen(3000)
