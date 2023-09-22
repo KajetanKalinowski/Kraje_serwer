@@ -69,5 +69,14 @@ app.use(cors())
             })
         
     })
+    app.get('/maxpopulacja',(req,res)=>{
+        
+            const sql = `SELECT population FROM kraje ORDER BY population DESC LIMIT 1`
+            con.query(sql,function(err,result,fields){
+                if(err) console.log(err)
+                res.send(result)
+            })
+        
+    })
 
     app.listen(3000)

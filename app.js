@@ -36,3 +36,26 @@ async function radioFetch(id){
     }
     
 }
+async function maxPop(){
+    const data = await fetch(`http://localhost:3000/maxpopulacja`)
+    const json = await data.json()
+    const range = document.getElementById("range")
+    range.setAttribute('max',json[0].population)
+    console.log(json)
+    range.addEventListener('input',(event)=>{
+        var string1 = event.target.value
+        document.getElementById("value").innerHTML = string1
+    })
+    for(var i=0;i<=10;i++){
+        if(i!=0){
+            const option = document.createElement('option')
+            option.value = parseInt(parseInt(json[0].population)/10*i)
+            option.label = `${parseInt(parseInt(json[0].population)/10*i)}`
+            document.getElementById('values').appendChild(option)
+
+
+        }
+        
+    }
+}
+maxPop()
