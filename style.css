@@ -70,24 +70,42 @@ datalist {
   
   input[type="range"] {
     width: 200px;
-    margin: 0;
+    height: 10px;
+    margin: 5px;
     visibility:visible;
   }
   input{
     visibility:hidden;
+    width: 0px;
+    height: 0px;
   }
   #nazwa{
     visibility:visible;
+    width: 177px;
+    height: 21px;
+    border: black 2px inset;
   }
   #stolica{
     visibility:visible;
+    width: 177px;
+    height: 21px;
+    border: black 2px inset;
   }
   #pop{
     visibility:visible;
+    width: 177px;
+    height: 21px;
+    border: black 2px inset;
   }
   #area{
     visibility:visible;
+    width: 177px;
+    height: 21px;
+    border: black 2px inset;
   }
   #kon{
     visibility:visible;
+    width: 177px;
+    height: 21px;
+    border: black 2px inset;
   }
