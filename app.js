@@ -78,6 +78,8 @@ async function addName(){
     const data = await fetch(`http://localhost:3000/add/${nazwa}/${stolica}/${pop}/${area}/${kon}`)
     const json = await data.json()
     console.log(json)
+    window.alert("Pomyślnie dodano Kraj do tabeli")
+    console.log("Pomyślnie dodano Kraj do tabeli")
     }
 
 }
