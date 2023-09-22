@@ -39,23 +39,22 @@ async function radioFetch(id){
 async function maxPop(){
     const data = await fetch(`http://localhost:3000/maxpopulacja`)
     const json = await data.json()
-    const range = document.getElementById("range")
-    range.setAttribute('max',json[0].population)
+    document.getElementById('range').setAttribute('max',json[0].population)
+    document.getElementById('range').setAttribute('step',parseInt(json[0].population)/10)
     console.log(json)
-    range.addEventListener('input',(event)=>{
-        var string1 = event.target.value
-        document.getElementById("value").innerHTML = string1
-    })
     for(var i=0;i<=10;i++){
-        if(i!=0){
-            const option = document.createElement('option')
-            option.value = parseInt(parseInt(json[0].population)/10*i)
-            option.label = `${parseInt(parseInt(json[0].population)/10*i)}`
-            document.getElementById('values').appendChild(option)
-
-
-        }
+        const option = document.createElement('option')
+        option.value = parseInt(parseInt(json[0].population)/10 *i).toLocaleString('en-US')
+        option.label = `${parseInt(parseInt(json[0].population)/10 *i).toLocaleString('en-US')}`
+        document.getElementById('values').appendChild(option)
+        
         
     }
+    document.getElementById('range').addEventListener("input", (event) => {
+        var newString = ''
+        var oldString = event.target.value
+        console.log(parseInt(oldString).toLocaleString())
+         document.getElementById('value').innerHTML = parseInt(oldString).toLocaleString('en-US');
+    });
 }
 maxPop()
