@@ -29,26 +29,32 @@ label{
 #Americas{
     width: 50px;
     height: 50px;
+    visibility:visible;
 }
 #Asia{
     width: 50px;
     height: 50px;
+    visibility:visible;
 }
 #Antarctic{
     width: 50px;
     height: 50px;
+    visibility:visible;
 }
 #Europe{
     width: 50px;
     height: 50px;
+    visibility:visible;
 }
 #Africa{
     width: 50px;
     height: 50px;
+    visibility:visible;
 }
 #Oceania{
     width: 50px;
     height: 50px;
+    visibility:visible;
 }
 datalist {
     display: flex;
@@ -65,4 +71,23 @@ datalist {
   input[type="range"] {
     width: 200px;
     margin: 0;
+    visibility:visible;
+  }
+  input{
+    visibility:hidden;
+  }
+  #nazwa{
+    visibility:visible;
+  }
+  #stolica{
+    visibility:visible;
+  }
+  #pop{
+    visibility:visible;
+  }
+  #area{
+    visibility:visible;
+  }
+  #kon{
+    visibility:visible;
   }

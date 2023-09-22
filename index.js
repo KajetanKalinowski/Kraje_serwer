@@ -78,5 +78,17 @@ app.use(cors())
             })
         
     })
+    app.get('/add/:nazwa/:stolica/:pop/:area/:kon',(req,res)=>{
+        const nazwa = req.params.nazwa
+        const stolica = req.params.stolica
+        const pop = parseInt(req.params.pop)
+        const area = parseInt(req.params.area)
+        const kon = req.params.kon
+        const sql = `INSERT INTO kraje(name, capital, population, area, kontynent) VALUES ("${nazwa}","${stolica}","${pop}","${area}","${kon}")`
+        con.query(sql,function(err,result,fields){
+            if(err) console.log(err)
+            res.send(result)
+        })
+    })
 
     app.listen(3000)

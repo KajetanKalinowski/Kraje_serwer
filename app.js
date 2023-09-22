@@ -18,8 +18,16 @@ async function getData(){
     })
     const label = document.createElement("label")
     label.innerHTML = json[i].kontynent
+    if(label.innerHTML=="Americas"||label.innerHTML=="Oceania"||label.innerHTML=="Asia"||label.innerHTML=="Europe"||label.innerHTML=="Antarctic"||label.innerHTML=="Africa"){
+        label.style.visibility="visible"
+    }else{
+        label.style.visibility="hidden"
+        label.style.width="0px"
+        label.style.height="0px"
+    }
     divradio.appendChild(radio)
     divradio.appendChild(label)
+    
     }
 
 }
@@ -58,3 +66,18 @@ async function maxPop(){
     });
 }
 maxPop()
+async function addName(){
+    const nazwa = document.getElementById("nazwa").value
+    const stolica = document.getElementById("stolica").value
+    const pop = document.getElementById("pop").value
+    const area = document.getElementById("area").value
+    const kon = document.getElementById("kon").value
+    if(nazwa==""||stolica==""||pop==""||area==""||kon==""){
+        window.alert("Wszystkie pola muszą być wypełnione")
+    }else{
+    const data = await fetch(`http://localhost:3000/add/${nazwa}/${stolica}/${pop}/${area}/${kon}`)
+    const json = await data.json()
+    console.log(json)
+    }
+
+}
